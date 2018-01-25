@@ -58,7 +58,10 @@ var settings = {
 
 	"icons": {
 		"showIcons": true
-	}
+	},
+    "weather": {
+        "showWeather" : true
+    }
 };
 
 /*  Clock  *\
@@ -239,6 +242,17 @@ $(document).ready(function() {
 		// Update clock
 		setInterval('updateClock()', 1000);
 	}
+  /*  weather thingy *\
+  \*=================*/
+
+if(settings.weather.showWeather) {
+        // add weather div
+        $.get("http://alext.duckdns.org/weewx/c/api/daily.json", (res) => {
+            const otemp = res.stats.current.outTemp
+            const itemp = res.stats.current.insideTemp
+            $("body").append(`<div id="weather">OUT:${otemp} | IN:${itemp}</div>`);
+        })
+}
 
 
 	/*  Keybindings  *\
