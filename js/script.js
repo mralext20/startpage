@@ -93,6 +93,19 @@ function updateClock() {
 	$("#clock").html(currentTimeString);
 }
 
+
+/* more weather*/
+
+function updateWeather() {
+    $.get("http://alext.duckdns.org/weewx/c/api/daily.json", (res) => {
+        const otemp = res.stats.current.outTemp
+        const itemp = res.stats.current.insideTemp
+        $("#weather").html(`\uD83C\uDF21:${otemp} \uD83C\uDFE0${itemp}`);
+    })
+}
+
+
+
 function searchBox(url, name, placeholder) {
 	var string = '<form method="get" action="' + url + '">'
 	           + '<input type="text" required id="g" name="' + name + '" placeholder="' + placeholder + '" maxlength="255" value="">'
@@ -246,12 +259,10 @@ $(document).ready(function() {
   \*=================*/
 
 if(settings.weather.showWeather) {
-        // add weather div
-        $.get("http://alext.duckdns.org/weewx/c/api/daily.json", (res) => {
-            const otemp = res.stats.current.outTemp
-            const itemp = res.stats.current.insideTemp
-            $("body").append(`<div id="weather">OUT:${otemp} | IN:${itemp}</div>`);
-        })
+    // add weather div
+    $('body').append('<div id="weather"></div>')
+    updateWeather()
+    setInterval('updateWeather()',600000)
 }
 
 
