@@ -138,6 +138,12 @@ li img {
     left: 10px;
     font-size: 2em;
 }
+#stats {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    font-size: 1.5em;
+}
 @media (max-width: 360px) {
 	#searches {
 		top: 0em;

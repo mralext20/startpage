@@ -61,6 +61,9 @@ var settings = {
 	},
     "weather": {
         "showWeather" : true
+  },
+    "stats": {
+        "showStats" : true
     }
 };
 
@@ -99,7 +102,6 @@ function updateClock() {
 function updateWeather() {
     var wind, otemp, itemp;
     $.get("http://alext.duckdns.org/weewx/c/api/daily.json", (res) => {
-        console.log("get thing");
         otemp = res.stats.current.outTemp;
         itemp = res.stats.current.insideTemp;
         $.get("http://alext.duckdns.org/weewx/api/daily.json", (res) =>{
@@ -113,6 +115,24 @@ function updateWeather() {
     });
 }
 
+
+function updateStats() {
+    $.get("/stats/api.php?hardware", (res) => {
+        var uptime = res.server_info.hardware.uptime;
+        // format uptime so we dont have trailing 0h / 0d
+        debugger;
+        var i = 0;
+        while (i != 2) {
+            if (0 == (parseInt(uptime))) {
+                // first char is a 0, therefor we need to drop it
+                uptime = uptime.slice(3);
+            }
+            i++;
+        }
+        const temp = res.server_info.hardware.temperature;
+        $("#stats").html(`\u23F0${uptime} \uD83D\uDCBB${temp}\u00B0C`);
+    });
+}
 
 
 function searchBox(url, name, placeholder) {
@@ -274,6 +294,14 @@ if(settings.weather.showWeather) {
     setInterval('updateWeather()',600000);
 }
 
+
+  /* computer stats *\
+  \*================*/
+    if(settings.stats.showStats) {
+        $('body').append('<a href="/stats"><div id="stats"></div></a>');
+        updateStats();
+        setInterval('updateStats()', 5000);
+    }
 
 	/*  Keybindings  *\
 	\*===============*/
