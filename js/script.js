@@ -97,15 +97,19 @@ function updateClock() {
 /* more weather*/
 
 function updateWeather() {
+    var wind, otemp, itemp;
     $.get("http://alext.duckdns.org/weewx/c/api/daily.json", (res) => {
-        const otemp = res.stats.current.outTemp;
-        const itemp = res.stats.current.insideTemp;
-        if (!isNaN(parseFloat(res.stats.current.windSpeed))) {
-            const wind = parseFloat(res.stats.current.windSpeed) * 2.23694;
-            $("#weather").html(`\uD83C\uDF21:${otemp} \uD83C\uDFE0:${itemp} \uD83C\uDF2C:${wind.toFixed(1)}MPH`);
-        } else {
-            $("#weather").html(`\uD83C\uDF21:${otemp} \uD83C\uDFE0:${itemp}`);
-        }
+        console.log("get thing");
+        otemp = res.stats.current.outTemp;
+        itemp = res.stats.current.insideTemp;
+        $.get("http://alext.duckdns.org/weewx/api/daily.json", (res) =>{
+            wind = res.stats.current.windSpeed;if (!isNaN(parseFloat(wind))) {
+                $("#weather").html(`\uD83C\uDF21:${otemp} \uD83C\uDFE0:${itemp} \uD83C\uDF2C:${parseFloat(wind)}MPH`);
+            } else {
+                $("#weather").html(`\uD83C\uDF21:${otemp} \uD83C\uDFE0:${itemp}`);
+            }
+
+        });
     });
 }
 
@@ -190,10 +194,10 @@ $(document).ready(function() {
 		/*  Add HTML code  *\
 		\*=================*/
 		if(settings.navigation.newWindow) {
-			html = html + '<li>' + iconHtml + '<a href="' + url + '" target="_blank">' + title + '</a></li>'
+			  html = html + '<li>' + iconHtml + '<a href="' + url + '" target="_blank">' + title + '</a></li>';
 		}
 		else {
-			html = html + '<li>' + iconHtml + '<a href="' + url + '">' + title + '</a></li>'
+			  html = html + '<li>' + iconHtml + '<a href="' + url + '">' + title + '</a></li>';
 		}
 	}
 
@@ -255,7 +259,7 @@ $(document).ready(function() {
 
 	if(settings.clock.showClock) {
 		// Add empty '#clock' div
-		$('body').append('<div id="clock"></div>');
+		$('body').append('<a href="http://time.is"><div id="clock"></div></a>');
 
 		// Update clock
 		setInterval('updateClock()', 1000);
@@ -265,9 +269,9 @@ $(document).ready(function() {
 
 if(settings.weather.showWeather) {
     // add weather div
-    $('body').append('<a href="http://alext.duckdns.org/weewx/c/"><div id="weather"></div></a>')
-    updateWeather()
-    setInterval('updateWeather()',600000)
+    $('body').append('<a href="http://alext.duckdns.org/weewx/c/"><div id="weather"></div></a>');
+    updateWeather();
+    setInterval('updateWeather()',600000);
 }
 
 
