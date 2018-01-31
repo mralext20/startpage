@@ -105,7 +105,9 @@ function updateWeather() {
         otemp = res.stats.current.outTemp;
         itemp = res.stats.current.insideTemp;
         $.get("http://alext.duckdns.org/weewx/api/daily.json", (res) =>{
-            wind = res.stats.current.windSpeed;if (!isNaN(parseFloat(wind))) {
+
+            wind = res.stats.current.windSpeed;
+            if (!isNaN(parseFloat(wind))) {
                 $("#weather").html(`\uD83C\uDF21:${otemp} \uD83C\uDFE0:${itemp} \uD83C\uDF2C:${parseFloat(wind)}MPH`);
             } else {
                 $("#weather").html(`\uD83C\uDF21:${otemp} \uD83C\uDFE0:${itemp}`);
@@ -120,17 +122,27 @@ function updateStats() {
     $.get("/stats/api.php?hardware", (res) => {
         var uptime = res.server_info.hardware.uptime;
         // format uptime so we dont have trailing 0h / 0d
-        debugger;
         var i = 0;
         while (i != 2) {
             if (0 == (parseInt(uptime))) {
-                // first char is a 0, therefor we need to drop it
+                // first char is a 0, therefor we need to drop it and the time, and the new trailing space
                 uptime = uptime.slice(3);
             }
             i++;
         }
         const temp = res.server_info.hardware.temperature;
-        $("#stats").html(`\u23F0${uptime} \uD83D\uDCBB${temp}\u00B0C`);
+        const batt_state = res.server_info.hardware.battery.state;
+        const batt_percent = res.server_info.hardware.battery.percent;
+        const batt_remaining = res.server_info.hardware.battery.time_remaining;
+        var batts;
+        if (batt_state == "Discharging") {
+            batts = `\uD83D\uDD0B${batt_percent} (${batt_remaining})`;
+        } else if (batt_state == "Charging") {
+            batts = `\uD83D\uDD0C\u26A1${batt_percent} (${batt_remaining})`;
+        } else {
+            batts = "\uD83D\uDD0C";
+        }
+        $("#stats").html(`\u23F0${uptime} \uD83D\uDCBB${temp}\u00B0C  ${batts}`);
     });
 }
 
@@ -250,7 +262,7 @@ $(document).ready(function() {
 
 	/*  Search Engines  *\
 	\*==================*/
-
+/*
 	var search = '<div id="searches">';
 
 	for (var i = 0; i < settings.search.engines.length; i++) {
@@ -266,14 +278,13 @@ $(document).ready(function() {
 
 	search = search + '</div>';
 
-	/*  Add to page  *\
-	\*===============*/
-	$('body').append(search);
+
+  $('body').append(search);
 	if(settings.search.focusSearch) {
 		var searchDiv = document.getElementById ('searches');
 		$(searchDiv.firstChild.firstChild).focus();
 	}
- 
+*/
 	/*  Clock  *\
 	\*=========*/
 
