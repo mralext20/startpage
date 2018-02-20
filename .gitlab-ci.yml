@@ -1,0 +1,4 @@
+deploy:
+  stage: deploy
+  script:
+    cp ./* /var/www/html/home/
