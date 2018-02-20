@@ -107,19 +107,19 @@ function updateWeather() {
         $.get("http://alext.duckdns.org/weewx/api/daily.json", (res) =>{
 
             wind = res.stats.current.windSpeed;
-            if (!isNaN(parseFloat(wind))) {
+            if (parseInt(wind) == "0 mph") {
                 $("#weather").html(`\uD83C\uDF21:${otemp} \uD83C\uDFE0:${itemp} \uD83C\uDF2C:${parseFloat(wind)}MPH`);
             } else {
                 $("#weather").html(`\uD83C\uDF21:${otemp} \uD83C\uDFE0:${itemp}`);
             }
-
+            debugger;
         });
     });
 }
 
 
 function updateStats() {
-    $.get("/stats/api.php?hardware", (res) => {
+    $.get("localhost/stats/api.php?hardware", (res) => {
         var uptime = res.server_info.hardware.uptime;
         // format uptime so we dont have trailing 0h / 0d
         var i = 0;
