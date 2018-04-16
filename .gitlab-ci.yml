@@ -1,4 +1,4 @@
 deploy:
   stage: deploy
   script:
-    cp -r ./* /srv/http/
+    cp -r ./* /srv/home/
