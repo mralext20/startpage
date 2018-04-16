@@ -92,7 +92,7 @@ a:hover {
 .block {
 	border-left: 1px solid #999; /* Left border of link block */
 	padding: 1em; /* Padding around link block */
-	width: 140px; /* Link block width */
+	width: flex; /* Link block width */
 }
 button {
 	background: transparent; /* Transparent button */
@@ -149,7 +149,8 @@ li img {
 		top: 0em;
 		right: initial;
 	}
-	#clock { position: absolute; }
+	#clock { position: absolute;top:0em;left:0em;}
+  #weather {position:absolute;top:1em;left:0em;}
 }
 
 /* SEARCH BOX ================================= */

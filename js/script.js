@@ -112,7 +112,6 @@ function updateWeather() {
             } else {
                 $("#weather").html(`\uD83C\uDF21:${otemp} \uD83C\uDFE0:${itemp}`);
             }
-            debugger;
         });
     });
 }
