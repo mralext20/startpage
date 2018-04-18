@@ -61,10 +61,7 @@ var settings = {
 	},
     "weather": {
         "showWeather" : true
-  },
-    "stats": {
-        "showStats" : true
-    }
+  }
 };
 
 /*  Clock  *\
@@ -115,36 +112,6 @@ function updateWeather() {
         });
     });
 }
-
-
-function updateStats() {
-    $.get("localhost/stats/api.php?hardware", (res) => {
-        var uptime = res.server_info.hardware.uptime;
-        // format uptime so we dont have trailing 0h / 0d
-        var i = 0;
-        while (i != 2) {
-            if (0 == (parseInt(uptime))) {
-                // first char is a 0, therefor we need to drop it and the time, and the new trailing space
-                uptime = uptime.slice(3);
-            }
-            i++;
-        }
-        const temp = res.server_info.hardware.temperature;
-        const batt_state = res.server_info.hardware.battery.state;
-        const batt_percent = res.server_info.hardware.battery.percent;
-        const batt_remaining = res.server_info.hardware.battery.time_remaining;
-        var batts;
-        if (batt_state == "Discharging") {
-            batts = `\uD83D\uDD0B${batt_percent} (${batt_remaining})`;
-        } else if (batt_state == "Charging") {
-            batts = `\uD83D\uDD0C\u26A1${batt_percent} (${batt_remaining})`;
-        } else {
-            batts = "\uD83D\uDD0C";
-        }
-        $("#stats").html(`\u23F0${uptime} \uD83D\uDCBB${temp}\u00B0C  ${batts}`);
-    });
-}
-
 
 function searchBox(url, name, placeholder) {
 	var string = '<form method="get" action="' + url + '">'
@@ -305,21 +272,12 @@ if(settings.weather.showWeather) {
 }
 
 
-  /* computer stats *\
-  \*================*/
-    if(settings.stats.showStats) {
-        $('body').append('<a href="/stats"><div id="stats"></div></a>');
-        updateStats();
-        setInterval('updateStats()', 5000);
-    }
-
 	/*  Keybindings  *\
 	\*===============*/
 
 	var typed = '';
 	var shortcutArray = Object.keys(shortcuts);
 	var typedDate = new Date();
-		
 	// Check if we typed a keybinding
 	function hasSubstring(element) {
 		var index = typed.indexOf(element);
