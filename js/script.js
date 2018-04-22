@@ -98,10 +98,10 @@ function updateClock() {
 
 function updateWeather() {
     var wind, otemp, itemp;
-    $.get("http://alext.duckdns.org/weewx/c/api/daily.json", (res) => {
+    $.get("https://alext.duckdns.org/weewx/c/api/daily.json", (res) => {
         otemp = res.stats.current.outTemp;
         itemp = res.stats.current.insideTemp;
-        $.get("http://alext.duckdns.org/weewx/api/daily.json", (res) =>{
+        $.get("https://alext.duckdns.org/weewx/api/daily.json", (res) =>{
 
             wind = res.stats.current.windSpeed;
             if (parseInt(wind) == "0 mph") {
