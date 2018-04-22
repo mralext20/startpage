@@ -259,6 +259,7 @@ $(document).ready(function() {
 		$('body').append('<a href="http://time.is"><div id="clock"></div></a>');
 
 		// Update clock
+        updateClock();
 		setInterval('updateClock()', 1000);
 	}
   /*  weather thingy *\
