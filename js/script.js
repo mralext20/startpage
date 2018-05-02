@@ -73,7 +73,7 @@ function updateClock() {
 	var currentSeconds = currentTime.getSeconds ();
 
 	// Pad the time with leading zeros, if required
-	currentHours = (currentHours < 10 ? "0" : "") + currentHours;
+	// currentHours = (currentHours < 10 ? "0" : "") + currentHours;
 	currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
 	currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
 
@@ -102,9 +102,8 @@ function updateWeather() {
         otemp = res.stats.current.outTemp;
         itemp = res.stats.current.insideTemp;
         $.get("https://alext.duckdns.org/weewx/api/daily.json", (res) =>{
-
             wind = res.stats.current.windSpeed;
-            if (parseInt(wind) == "0 mph") {
+            if (parseFloat(wind) != 0) {
                 $("#weather").html(`\uD83C\uDF21:${otemp} \uD83C\uDFE0:${itemp} \uD83C\uDF2C:${parseFloat(wind)}MPH`);
             } else {
                 $("#weather").html(`\uD83C\uDF21:${otemp} \uD83C\uDFE0:${itemp}`);
