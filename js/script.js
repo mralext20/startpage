@@ -30,7 +30,7 @@
 	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	OUT Ohttps://inbox.google.com/u/0/F OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 	THE SOFTWARE.
 */
 
@@ -61,7 +61,11 @@ var settings = {
 	},
     "weather": {
         "showWeather" : true
-  }
+    },
+    "music": {
+        "show" : true,
+        "apiLocation" : "http://localhost:8123"
+    }
 };
 
 /*  Clock  *\
@@ -104,13 +108,77 @@ function updateWeather() {
         $.get("https://alext.duckdns.org/weewx/api/daily.json", (res) =>{
             wind = res.stats.current.windSpeed;
             if (parseFloat(wind) != 0) {
-                $("#weather").html(`\uD83C\uDF21:${otemp} \uD83C\uDFE0:${itemp} \uD83C\uDF2C:${parseFloat(wind)}MPH`);
+                target = `\uD83C\uDF21:${otemp} \uD83C\uDFE0:${itemp} \uD83C\uDF2C:${parseFloat(wind)}MPH`;
             } else {
-                $("#weather").html(`\uD83C\uDF21:${otemp} \uD83C\uDFE0:${itemp}`);
+                target = `\uD83C\uDF21:${otemp} \uD83C\uDFE0:${itemp}`;
             }
+            rain = res.stats.sinceMidnight.rainSum;
+            if (parseFloat(rain) != 0) {
+                target = target + ` \uD83C\uDF27:${parseFloat(rain)}in`;
+            }
+            $("#weather").html(target);
         });
     });
 }
+
+
+connected = false;
+
+let backControls = '<i class="fas fa-fast-backward" onclick="back()"></i> <i class="fas fa-backward" onclick="rewind()"></i> ';
+let forewardControls = ' <i class="fas fa-forward" onclick="foreward()"></i> <i class="fas fa-fast-forward" onclick="ahead()"></i>';
+
+function updateMusic() {
+
+    connected = false;
+    $.get(`${settings.music.apiLocation}/api/status`, (res) => {
+        connected = true;
+        //console.log("started processing req");
+        duration = res.duration;
+        currentPosition = res.position;
+        if (res.metadata.title) {
+            title = res.metadata.title;
+        } else {
+            title = res.filename;
+        }
+        if (res.metadata.artist) {
+            artist = ` - ${res.metadata.artist}`;
+        } else {
+            artist = "";
+        }
+        if (res.metadata.album) {
+            album = ` - ${res.metadata.album}`;
+        } else {
+            album = "";
+        }
+        progress = ` (${Math.round((currentPosition / duration)*100)}%)`;
+        track = `${title}${artist}${album}`;
+        $('#musicleft').html(`${track}${progress}`);
+        if (res.pause == "yes") {
+            // we are paused
+            state = '<i class="fas fa-play" onclick="play()"></i>';
+        } else {
+            state = '<i class="fas fa-pause" onclick="pause()"></i>';
+        }
+        trackControl = `${backControls}${state}${forewardControls}`;
+        $('#musicright').html(trackControl);
+        //console.log('processed and put on page');
+    });
+
+    setTimeout(function () {if (connected == false) {
+        //console.log("welp, didnt get a responce in time i guess");
+        $('#musicleft').html("");
+        $('#musicright').html("");
+    }}, 500);
+
+}
+
+
+function back() {$.post(`${settings.music.apiLocation}/api/playlist_prev`);}
+function rewind() {$.post(`${settings.music.apiLocation}/api/seek/-10`);}
+function pause () {$.post(`${settings.music.apiLocation}/api/pause`);}
+function play () {$.post(`${settings.music.apiLocation}/api/play`);}
+function foreward () {$.post(`${settings.music.apiLocation}/api/seek/10`);}
+function ahead () {$.post(`${settings.music.apiLocation}/api/playlist_next`);}
 
 function searchBox(url, name, placeholder) {
 	var string = '<form method="get" action="' + url + '">'
@@ -270,6 +338,16 @@ if(settings.weather.showWeather) {
     updateWeather();
     setInterval('updateWeather()',600000);
 }
+
+    // add music div if music
+    if (settings.music.show) {
+        $('body').append('<div id="musicleft"></div><div id="musicright"></div>');
+        updateMusic();
+        setInterval('updateMusic()', 1000);
+    }
+
+
+
 
 
 	/*  Keybindings  *\
