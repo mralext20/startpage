@@ -102,21 +102,34 @@ function updateClock() {
 
 function updateWeather() {
     var wind, otemp, itemp;
-    $.get("https://alext.duckdns.org/weewx/c/api/daily.json", (res) => {
+    $.get("https://alext.duckdns.org/weewx/c/api/daily.json", (res) => { // celcius stats
         otemp = res.stats.current.outTemp;
         itemp = res.stats.current.insideTemp;
-        $.get("https://alext.duckdns.org/weewx/api/daily.json", (res) =>{
+
+        $.get("https://alext.duckdns.org/weewx/api/daily.json", (res) =>{ // ferinhight stats
             wind = res.stats.current.windSpeed;
-            if (parseFloat(wind) != 0) {
-                target = `\uD83C\uDF21:${otemp} \uD83C\uDFE0:${itemp} \uD83C\uDF2C:${parseFloat(wind)}MPH`;
-            } else {
-                target = `\uD83C\uDF21:${otemp} \uD83C\uDFE0:${itemp}`;
-            }
             rain = res.stats.sinceMidnight.rainSum;
-            if (parseFloat(rain) != 0) {
-                target = target + ` \uD83C\uDF27:${parseFloat(rain)}in`;
+
+            if (otemp.charAt(otemp.length-1) != 'A') {
+                out = `\uD83C\uDF21:${otemp}`;
+            } else {
+                out = "";
             }
-            $("#weather").html(target);
+            if (itemp.charAt(otemp.length -1) != 'A') {
+                out = out +  ` \uD83C\uDFE0:${itemp}`;
+            }
+            if (wind.charAt(wind.length-1) != 'A'){
+                if (parseFloat(wind) != 0) {
+                    out = out + ` \uD83C\uDF2C:${parseFloat(wind)}MPH`;
+                }
+            }
+            if (rain.charAt(rain.length-1) != 'A') {
+                if (parseFloat(rain) != 0) {
+                    out = out + ` \uD83C\uDF27:${parseFloat(rain)}in`;
+                }
+            }
+
+            $("#weather").html(out);
         });
     });
 }
@@ -127,6 +140,17 @@ connected = false;
 let backControls = '<i class="fas fa-fast-backward" onclick="back()"></i> <i class="fas fa-backward" onclick="rewind()"></i> ';
 let forewardControls = ' <i class="fas fa-forward" onclick="foreward()"></i> <i class="fas fa-fast-forward" onclick="ahead()"></i>';
 
+
+function spl (string,pad,length) {
+    return (new Array(length+1).join(pad)+string).slice(-length);
+}
+
+
+function prettyTime(seconds) {
+    return `${spl(Math.floor(seconds/60),'0',1)}:${spl(seconds % 60,'0',2)}`;
+}
+
+
 function updateMusic() {
 
     connected = false;
@@ -135,6 +159,8 @@ function updateMusic() {
         //console.log("started processing req");
         duration = res.duration;
         currentPosition = res.position;
+        time = `${prettyTime(currentPosition)}/${prettyTime(duration)}`;
+
         if (res.metadata.title) {
             title = res.metadata.title;
         } else {
@@ -142,17 +168,24 @@ function updateMusic() {
         }
         if (res.metadata.artist) {
             artist = ` - ${res.metadata.artist}`;
+            artistNewLine = `<br/>${res.metadata.artist}`;
         } else {
             artist = "";
+            artistNewLine = "";
         }
         if (res.metadata.album) {
             album = ` - ${res.metadata.album}`;
+            albumNewLine = `<br/>${res.metadata.album}`;
         } else {
             album = "";
+            albumNewLine = "";
         }
         progress = ` (${Math.round((currentPosition / duration)*100)}%)`;
         track = `${title}${artist}${album}`;
-        $('#musicleft').html(`${track}${progress}`);
+        if (track.length > 60) {
+            track = `${title}${artistNewLine}${albumNewLine}\n`;
+        }
+        $('#musicleft').html(`${track}<br>${progress} ${time}`);
         if (res.pause == "yes") {
             // we are paused
             state = '<i class="fas fa-play" onclick="play()"></i>';
