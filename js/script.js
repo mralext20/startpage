@@ -10,7 +10,7 @@
 
 /**
 	Released under MIT License
-	
+
 	Copyright (c) 2010 Jukka Svahn, Christian Brassat
 	<http://rahforum.biz>
 	<http://crshd.cc>
@@ -21,16 +21,16 @@
 	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 	copies of the Software, and to permit persons to whom the Software is
 	furnished to do so, subject to the following conditions:
-	
-	The above copyright notice and this permission notice shall be included in
+
+  The above copyright notice and this permission notice shall be included in
 	all copies or substantial portions of the Software.
-	
+
 	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	OUT Ohttps://inbox.google.com/u/0/F OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 	THE SOFTWARE.
 */
 
@@ -111,21 +111,27 @@ function updateWeather() {
             rain = res.stats.sinceMidnight.rainSum;
 
             if (otemp.charAt(otemp.length-1) != 'A') {
-                out = `\uD83C\uDF21:${otemp}`;
+                out = `<i class="fas fa-thermometer-three-quarters"></i>:${otemp}`;
             } else {
                 out = "";
             }
             if (itemp.charAt(otemp.length -1) != 'A') {
-                out = out +  ` \uD83C\uDFE0:${itemp}`;
+                out = out +  ` <i class="fas fa-home"></i>:${itemp}`;
             }
             if (wind.charAt(wind.length-1) != 'A'){
                 if (parseFloat(wind) != 0) {
-                    out = out + ` \uD83C\uDF2C:${parseFloat(wind)}MPH`;
+                    winddir = res.stats.current.windDirText;
+                    windgust = res.stats.current.windGust;
+                    if (parseFloat(wind) != parseFloat(windgust)) {
+                        out = out + ` \uD83C\uDF2C:${winddir} ${parseFloat(wind)}G${parseFloat(windgust)} MPH`;
+                    } else {
+                    out = out + ` \uD83C\uDF2C:${winddir}${parseFloat(wind)}MPH`;
+                    }
                 }
             }
             if (rain.charAt(rain.length-1) != 'A') {
                 if (parseFloat(rain) != 0) {
-                    out = out + ` \uD83C\uDF27:${parseFloat(rain)}in`;
+                    out = out + ` <i class="fas fa-tint"></i>:${parseFloat(rain)}in`;
                 }
             }
 
@@ -164,7 +170,7 @@ function updateMusic() {
         if (res.metadata.title) {
             title = res.metadata.title;
         } else {
-            title = res.filename;
+            title = res.file;
         }
         if (res.metadata.artist) {
             artist = ` - ${res.metadata.artist}`;
@@ -369,7 +375,7 @@ if(settings.weather.showWeather) {
     // add weather div
     $('body').append('<a href="http://alext.duckdns.org/weewx/c/"><div id="weather"></div></a>');
     updateWeather();
-    setInterval('updateWeather()',600000);
+    setInterval('updateWeather()',300000);
 }
 
     // add music div if music
