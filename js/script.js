@@ -164,9 +164,12 @@ function updateMusic() {
         connected = true;
         //console.log("started processing req");
         duration = res.duration;
-        currentPosition = res.position;
-        time = `${prettyTime(currentPosition)}/${prettyTime(duration)}`;
-
+		currentPosition = res.position;
+		if (res.pause == "yes") {
+			time = `${prettyTime(currentPosition)}/${prettyTime(duration)} (Paused)`;
+		} else {
+		    time = `${prettyTime(currentPosition)}/${prettyTime(duration)}`;
+		}
         if (res.metadata.title) {
             title = res.metadata.title;
         } else {
