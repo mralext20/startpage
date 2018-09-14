@@ -91,8 +91,8 @@ a:hover {
 }
 .block {
 	border-left: 1px solid #999; /* Left border of link block */
-	padding: 1em; /* Padding around link block */
-	width: flex; /* Link block width */
+	padding-left: .75em; /* Padding around link block */
+	padding-right: .75em;  
 }
 button {
 	background: transparent; /* Transparent button */
@@ -110,10 +110,12 @@ h1 {
 }
 ul {
 	padding: 0em;
+	margin-bottom:0em;
 }
 ul li {
 	list-style: none;
 	padding: 5px;
+	height:1em;
 }
 li img {
 	width: 16px;
