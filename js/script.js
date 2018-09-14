@@ -62,10 +62,6 @@ var settings = {
     "weather": {
         "showWeather" : true
     },
-    "music": {
-        "show" : true,
-        "apiLocation" : "http://localhost:8123"
-    }
 };
 
 /*  Clock  *\
