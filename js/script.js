@@ -141,96 +141,6 @@ function updateWeather() {
 }
 
 
-connected = false;
-
-let backControls = '<i class="fas fa-fast-backward" onclick="back()"></i> <i class="fas fa-backward" onclick="rewind()"></i> ';
-let forewardControls = ' <i class="fas fa-forward" onclick="foreward()"></i> <i class="fas fa-fast-forward" onclick="ahead()"></i>';
-
-
-function spl (string,pad,length) {
-    return (new Array(length+1).join(pad)+string).slice(-length);
-}
-
-
-function prettyTime(seconds) {
-    return `${spl(Math.floor(seconds/60),'0',1)}:${spl(seconds % 60,'0',2)}`;
-}
-
-
-function updateMusic() {
-
-    connected = false;
-    $.get(`${settings.music.apiLocation}/api/status`, (res) => {
-        connected = true;
-        //console.log("started processing req");
-        duration = res.duration;
-		currentPosition = res.position;
-		if (res.pause == "yes") {
-			time = `${prettyTime(currentPosition)}/${prettyTime(duration)} (Paused)`;
-		} else {
-		    time = `${prettyTime(currentPosition)}/${prettyTime(duration)}`;
-		}
-        if (res.metadata.title) {
-            title = res.metadata.title;
-        } else {
-            title = res.file;
-        }
-        if (res.metadata.artist) {
-            artist = ` - ${res.metadata.artist}`;
-            artistNewLine = `<br/>${res.metadata.artist}`;
-        } else {
-            artist = "";
-            artistNewLine = "";
-        }
-        if (res.metadata.album) {
-            album = ` - ${res.metadata.album}`;
-            albumNewLine = `<br/>${res.metadata.album}`;
-        } else {
-            album = "";
-            albumNewLine = "";
-        }
-        progress = ` (${Math.round((currentPosition / duration)*100)}%)`;
-        track = `${title}${artist}${album}`;
-        if (track.length > 60) {
-            track = `${title}${artistNewLine}${albumNewLine}\n`;
-        }
-        $('#musicleft').html(`${track}<br>${progress} ${time}`);
-        if (res.pause == "yes") {
-            // we are paused
-            state = '<i class="fas fa-play" onclick="play()"></i>';
-        } else {
-            state = '<i class="fas fa-pause" onclick="pause()"></i>';
-        }
-        trackControl = `${backControls}${state}${forewardControls}`;
-        $('#musicright').html(trackControl);
-        //console.log('processed and put on page');
-    });
-
-    setTimeout(function () {if (connected == false) {
-        //console.log("welp, didnt get a responce in time i guess");
-        $('#musicleft').html("");
-        $('#musicright').html("");
-    }}, 500);
-
-}
-
-
-function back() {$.post(`${settings.music.apiLocation}/api/playlist_prev`);}
-function rewind() {$.post(`${settings.music.apiLocation}/api/seek/-10`);}
-function pause () {$.post(`${settings.music.apiLocation}/api/pause`);}
-function play () {$.post(`${settings.music.apiLocation}/api/play`);}
-function foreward () {$.post(`${settings.music.apiLocation}/api/seek/10`);}
-function ahead () {$.post(`${settings.music.apiLocation}/api/playlist_next`);}
-
-function searchBox(url, name, placeholder) {
-	var string = '<form method="get" action="' + url + '">'
-	           + '<input type="text" required id="g" name="' + name + '" placeholder="' + placeholder + '" maxlength="255" value="">'
-	           + '<span class="highlight"></span>'
-	           + '<span class="bar"></span>'
-	           + '</form>';
-	return string;
-}
-
 $(document).ready(function() {
 
 	var shortcuts = {};
@@ -380,15 +290,6 @@ if(settings.weather.showWeather) {
     updateWeather();
     setInterval('updateWeather()',300000);
 }
-
-    // add music div if music
-    if (settings.music.show) {
-        $('body').append('<div id="musicleft"></div><div id="musicright"></div>');
-        updateMusic();
-        setInterval('updateMusic()', 1000);
-    }
-
-
 
 
 
