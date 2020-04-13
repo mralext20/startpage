@@ -98,11 +98,11 @@ function updateClock() {
 
 function updateWeather() {
     var wind, otemp, itemp;
-    $.get("https://alext.duckdns.org/weewx/c/api/daily.json", (res) => { // celcius stats
+    $.get("http://alext.duckdns.org/weewx/c/api/daily.json", (res) => { // celcius stats
         otemp = res.stats.current.outTemp;
         itemp = res.stats.current.insideTemp;
 
-        $.get("https://alext.duckdns.org/weewx/api/daily.json", (res) =>{ // ferinhight stats
+        $.get("http://alext.duckdns.org/weewx/api/daily.json", (res) =>{ // ferinhight stats
             wind = res.stats.current.windSpeed;
             rain = res.stats.sinceMidnight.rainSum;
 
