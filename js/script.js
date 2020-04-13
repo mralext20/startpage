@@ -41,24 +41,10 @@ var settings = {
 		"newWindow": false
 	},
 
-	"search": {
-		"engines": [
-			["http://www.google.com/search", "q", "Google", "sg"],
-		],
-		"focusSearch": false
-	},
-
 	"clock": {
 		"showClock": true
 	},
 
-	"animation": {
-		"hideLinks": true
-	},
-
-	"icons": {
-		"showIcons": true
-	},
 	"weather": {
 		"showWeather": true
 	},
