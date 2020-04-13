@@ -1,21 +1,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" href="style/style.css" type="text/css" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="style/style.css" type="text/css" />
 
   <script defer src="js/fontawesome-all.js"></script>
   <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
   <script type="text/javascript" src="js/script.js"></script>
 
-<!-- Page Title -->
-<title>New Tab Page</title>
+  <!-- Page Title -->
+  <title>New Tab Page</title>
 
 </head>
-<body class="container-flexbox">
-<div id="container" class="container-flexbox">
 
-<!--
+<body class="container-flexbox">
+  <div id="container" class="container-flexbox">
+
+    <!--
 URLs go here, in the following format:
 
 Heading Text
@@ -24,23 +26,46 @@ http://www.example.com || Title || Keybinding
 Second Heading Text
 http://www.example.com || Another Title
 -->
-
-        Google
-        https://mail.google.com || Mail || gm || https://ssl.gstatic.com/ui/v1/icons/mail/images/favicon.ico
-        https://photos.google.com || Photos || gp || https://ssl.gstatic.com/images/branding/product/2x/photos_96dp.png
-        
-        Robotics
-        http://192.168.49.1:8080/?page=java/editor.html || OnBotJava || robj || images/robj.png
-        https://metalknights.me/ || MetalKnights || rmk || images/mk.png
-
-        Coding
-        https://github.com || Github || cgh || images/github.png
-        https://discordpy.readthedocs.io/en/latest/ || d.py docs || cdpy || https://cdn.discordapp.com/attachments/336642776609456130/382259983380905995/pydiscord-ades-pisces-set4-fix4.png
-        https://docs.google.com/document/d/1GZ1Gx3eXjRBT_6Rsh5ua0IVmqigK7wfBMI8388bUnKQ/view || week schedule || fws || https://www.gstatic.com/images/branding/product/1x/docs_48dp.png
-        
-        Services
-        http://pi.alext.duckdns.org/admin || Pi-Hole || sp || http://pi.alext.duckdns.org/admin/img/logo.svg
-        http://pi.alext.duckdns.org/weewx/c || Weewx || sw || http://pi.alext.duckdns.org/weewx/favicon.ico
-       </div>
+    <div id="container" class="container-flexbox">
+      <div class="block">
+        <h1>Google</h1>
+        <ul>
+          <li><img src="https://ssl.gstatic.com/ui/v1/icons/mail/images/favicon.ico"><a
+              href="https://mail.google.com">Mail</a></li>
+          <li><img src="https://ssl.gstatic.com/images/branding/product/2x/photos_96dp.png"><a
+              href="https://photos.google.com">Photos</a></li>
+        </ul>
+      </div>
+      <div class="block">
+        <h1>Robotics</h1>
+        <ul>
+          <li><img src="images/robj.png"><a href="http://192.168.49.1:8080/?page=java/editor.html">OnBotJava</a></li>
+          <li><img src="images/mk.png"><a href="https://metalknights.me/">MetalKnights</a></li>
+        </ul>
+      </div>
+      <div class="block">
+        <h1>Coding</h1>
+        <ul>
+          <li><img src="images/github.png"><a href="https://github.com">Github</a></li>
+          <li><img
+              src="https://cdn.discordapp.com/attachments/336642776609456130/382259983380905995/pydiscord-ades-pisces-set4-fix4.png"><a
+              href="https://discordpy.readthedocs.io/en/latest/">d.py docs</a></li>
+          <li><img src="https://www.gstatic.com/images/branding/product/1x/docs_48dp.png"><a
+              href="https://docs.google.com/document/d/1GZ1Gx3eXjRBT_6Rsh5ua0IVmqigK7wfBMI8388bUnKQ/view">week
+              schedule</a></li>
+        </ul>
+      </div>
+      <div class="block">
+        <h1>Services</h1>
+        <ul>
+          <li><img src="http://pi.alext.duckdns.org/admin/img/logo.svg"><a
+              href="http://pi.alext.duckdns.org/admin">Pi-Hole</a></li>
+          <li><img src="http://pi.alext.duckdns.org/weewx/favicon.ico"><a
+              href="http://pi.alext.duckdns.org/weewx/c">Weewx</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </body>
+
 </html>

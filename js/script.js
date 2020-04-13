@@ -40,14 +40,14 @@ var settings = {
 	"navigation": {
 		"newWindow": false
 	},
-	
+
 	"search": {
 		"engines": [
 			["http://www.google.com/search", "q", "Google", "sg"],
 		],
 		"focusSearch": false
 	},
-	
+
 	"clock": {
 		"showClock": true
 	},
@@ -59,18 +59,18 @@ var settings = {
 	"icons": {
 		"showIcons": true
 	},
-    "weather": {
-        "showWeather" : true
-    },
+	"weather": {
+		"showWeather": true
+	},
 };
 
 /*  Clock  *\
 \*=========*/
 function updateClock() {
-	var currentTime = new Date ();
-	var currentHours = currentTime.getHours ();
-	var currentMinutes = currentTime.getMinutes ();
-	var currentSeconds = currentTime.getSeconds ();
+	var currentTime = new Date();
+	var currentHours = currentTime.getHours();
+	var currentMinutes = currentTime.getMinutes();
+	var currentSeconds = currentTime.getSeconds();
 
 	// Pad the time with leading zeros, if required
 	// currentHours = (currentHours < 10 ? "0" : "") + currentHours;
@@ -81,7 +81,7 @@ function updateClock() {
 	//var timeOfDay = (currentHours < 12) ? "AM" : "PM";
 
 	// Convert the hours component to 12-hour format if needed
-  currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
+	currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
 
 	// Convert an hours component of "0" to "12"
 	currentHours = (currentHours == 0) ? 12 : currentHours;
@@ -97,233 +97,66 @@ function updateClock() {
 /* more weather*/
 
 function updateWeather() {
-    var wind, otemp, itemp;
-    $.get("http://alext.duckdns.org/weewx/c/api/daily.json", (res) => { // celcius stats
-        otemp = res.stats.current.outTemp;
-        itemp = res.stats.current.insideTemp;
+	var wind, otemp, itemp;
+	$.get("http://alext.duckdns.org/weewx/c/api/daily.json", (res) => { // celcius stats
+		otemp = res.stats.current.outTemp;
+		itemp = res.stats.current.insideTemp;
 
-        $.get("http://alext.duckdns.org/weewx/api/daily.json", (res) =>{ // ferinhight stats
-            wind = res.stats.current.windSpeed;
-            rain = res.stats.sinceMidnight.rainSum;
+		$.get("http://alext.duckdns.org/weewx/api/daily.json", (res) => { // ferinhight stats
+			wind = res.stats.current.windSpeed;
+			rain = res.stats.sinceMidnight.rainSum;
 
-            if (otemp.charAt(otemp.length-1) != 'A') {
-                out = `<i class="fas fa-thermometer-three-quarters"></i>:${otemp}`;
-            } else {
-                out = "";
-            }
-            if (itemp.charAt(otemp.length -1) != 'A') {
-                out = out +  ` <i class="fas fa-home"></i>:${itemp}`;
-            }
-            if (wind.charAt(wind.length-1) != 'A'){
-                if (parseFloat(wind) != 0) {
-                    winddir = res.stats.current.windDirText;
-                    windgust = res.stats.current.windGust;
-                    if (parseFloat(wind) != parseFloat(windgust)) {
-                        out = out + ` \uD83C\uDF2C:${winddir} ${parseFloat(wind)}G${parseFloat(windgust)} MPH`;
-                    } else {
-                    out = out + ` \uD83C\uDF2C:${winddir}${parseFloat(wind)}MPH`;
-                    }
-                }
-            }
-            if (rain.charAt(rain.length-1) != 'A') {
-                if (parseFloat(rain) != 0) {
-                    out = out + ` <i class="fas fa-tint"></i>:${parseFloat(rain)}in`;
-                }
-            }
+			if (otemp.charAt(otemp.length - 1) != 'A') {
+				out = `<i class="fas fa-thermometer-three-quarters"></i>:${otemp}`;
+			} else {
+				out = "";
+			}
+			if (itemp.charAt(otemp.length - 1) != 'A') {
+				out = out + ` <i class="fas fa-home"></i>:${itemp}`;
+			}
+			if (wind.charAt(wind.length - 1) != 'A') {
+				if (parseFloat(wind) != 0) {
+					winddir = res.stats.current.windDirText;
+					windgust = res.stats.current.windGust;
+					if (parseFloat(wind) != parseFloat(windgust)) {
+						out = out + ` \uD83C\uDF2C:${winddir} ${parseFloat(wind)}G${parseFloat(windgust)} MPH`;
+					} else {
+						out = out + ` \uD83C\uDF2C:${winddir}${parseFloat(wind)}MPH`;
+					}
+				}
+			}
+			if (rain.charAt(rain.length - 1) != 'A') {
+				if (parseFloat(rain) != 0) {
+					out = out + ` <i class="fas fa-tint"></i>:${parseFloat(rain)}in`;
+				}
+			}
 
-            $("#weather").html(out);
-        });
-    });
+			$("#weather").html(out);
+		});
+	});
 }
 
 
-$(document).ready(function() {
+$(document).ready(function () {
 
-	var shortcuts = {};
-	
-	/*  Get Links  *\
-	\*=============*/
-	var linkString = $('#container').text();
-
-	/*  Clear Page  *\
-	\*==============*/
-	$('#container').empty();
-
-	/*  Create Array from linkString  *\
-	\*================================*/
-	var linkArray = linkString.split("\n");
-
-	/*  Go thru Array  *\
-	\*=================*/
-	var i;
-	var count = 1;
-	var html = '';
-
-	for(i in linkArray) {
-
-		/*  Get line  *\
-		\*============*/
-		var line = jQuery.trim(linkArray[i]);
-
-		// If line is empty, skip
-		if(!line) continue;
-
-		/*  If it doesn't contain "://",  *\
-		|*  it's not a URL                *|
-		\*================================*/
-		if(/:\/\//.test(line) != true) {
-			if(count > 1) {
-				html = html + '</div>';
-			}
-			html = html + '<div class="block"><h1>' + line + '</h1><ul>';
-			count++;
-			continue;
-		}
-
-		/*  Split URL, Title and icon (if any) *\
-		\*=======================*/
-		var lineArray = line.split(" || ");
-		var url = lineArray[0];
-		var title = lineArray[1];
-		
-		var icon = "";
-		if (lineArray[3]) {
-			icon = lineArray[3];
-		}
-		
-		/*  Add to shortcuts array *\
-		\*=========================*/
-		if(lineArray[2]) {
-			shortcuts[lineArray[2]] = "'"+url+"'";
-		}
-
-		/* Prepares HTML code for showing icon *\
-		\*=====================================*/
-		var iconHtml = '';
-		if (settings.icons.showIcons && icon) {
-			iconHtml = '<img src="' + icon + '"/>'; 
-		}
-
-		/*  Add HTML code  *\
-		\*=================*/
-		if(settings.navigation.newWindow) {
-			  html = html + '<li>' + iconHtml + '<a href="' + url + '" target="_blank">' + title + '</a></li>';
-		}
-		else {
-			  html = html + '<li>' + iconHtml + '<a href="' + url + '">' + title + '</a></li>';
-		}
-	}
-
-	/*  Add generated content to page  *\
-	\*=================================*/
-	html = html + '</ul></div>';
-	$('#container').append(html);
-
-
-	/*  Animation Time!  *\
-	\*===================*/
-	
-	/*  Hide lists  *\
-	\*==============*/
-	// if (settings.animation.hideLinks) {
-	// 	$('ul').slideUp();
-
-	// 	/*  Show on hover  *\
-	// 	\*=================*/
-	// 	$('.block').mouseenter(function() {
-	// 		$('ul', this).slideDown();
-	// 	});
-
-	// 	/*  Hide on unhover  *\
-	// 	\*===================*/
-	// 	$('.block').mouseleave(function() {
-	// 		$('ul', this).slideUp();
-	// 	});
-
-
-	/*  Search Engines  *\
-	\*==================*/
-/*
-	var search = '<div id="searches">';
-
-	for (var i = 0; i < settings.search.engines.length; i++) {
-		var engine = settings.search.engines[i];
-		search = search + searchBox(engine[0], engine[1], engine[2]);
-		if(engine[3]) {
-			var jsSearchUrl=engine[0]+"?"+engine[1]+"=";
-			var jsSearchPrompt="prompt('Search "+engine[2]+":')";
-			var jsSearch="'"+jsSearchUrl+"'+"+jsSearchPrompt;
-			shortcuts[engine[3]] = jsSearch;
-      }
-	}
-
-	search = search + '</div>';
-
-
-  $('body').append(search);
-	if(settings.search.focusSearch) {
-		var searchDiv = document.getElementById ('searches');
-		$(searchDiv.firstChild.firstChild).focus();
-	}
-*/
 	/*  Clock  *\
 	\*=========*/
 
-	if(settings.clock.showClock) {
+	if (settings.clock.showClock) {
 		// Add empty '#clock' div
 		$('body').append('<a href="http://time.is"><div id="clock"></div></a>');
 
 		// Update clock
-        updateClock();
+		updateClock();
 		setInterval('updateClock()', 1000);
 	}
   /*  weather thingy *\
   \*=================*/
 
-if(settings.weather.showWeather) {
-    // add weather div
-    $('body').append('<a href="http://alext.duckdns.org/weewx/c/"><div id="weather"></div></a>');
-    updateWeather();
-    setInterval('updateWeather()',300000);
-}
-
-
-
-	/*  Keybindings  *\
-	\*===============*/
-
-	var typed = '';
-	var shortcutArray = Object.keys(shortcuts);
-	var typedDate = new Date();
-	// Check if we typed a keybinding
-	function hasSubstring(element) {
-		var index = typed.indexOf(element);
-		if(index >= 0) {
-			var sliced = typed.slice(index, typed.length);
-			typed = ''; // Clean typed, so that we can watch for the next keybinding
-			if(settings.navigation.newWindow) {
-				window.open(eval(shortcuts[sliced]));
-			} else {
-				window.location.replace(eval(shortcuts[sliced]));
-			}
-		}
+	if (settings.weather.showWeather) {
+		// add weather div
+		$('body').append('<a href="http://alext.duckdns.org/weewx/c/"><div id="weather"></div></a>');
+		updateWeather();
+		setInterval('updateWeather()', 300000);
 	}
-
-	// React on keypress
-	$(window).keypress(function(e) {
-		// If we're in an input, we don't want to interpret the keypresses
-		$('input').keypress(function(e) {
-			e.stopPropagation();
-		});
-		var nowDate = new Date();
-		var diffMs = (nowDate - typedDate);
-		if (diffMs > 1000) {	
-			typed = String.fromCharCode(e.which);
-		} else {
-			typed = typed + String.fromCharCode(e.which);
-		}
-		typedDate = new Date();
-		shortcutArray.some(hasSubstring);
-	});
-
 });
