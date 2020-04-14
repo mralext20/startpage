@@ -13,7 +13,7 @@ export default class ValuesController {
   constructor() {
     store.subscribe("time", _draw);
     TimeService.update()
-    setTimeout(() => {
+    setInterval(() => {
       TimeService.update()
     }, 250); // 1/4 a minute
   }

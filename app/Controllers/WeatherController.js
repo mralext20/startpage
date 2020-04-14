@@ -13,7 +13,7 @@ export default class ValuesController {
   constructor() {
     store.subscribe("weather", _draw);
     WeatherService.update();
-    setTimeout(() => {
+    setInterval(() => {
       WeatherService.update()
     }, 5 * 60 * 1000); // 5 minutes
   }
