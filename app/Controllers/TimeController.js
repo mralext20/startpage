@@ -9,7 +9,7 @@ function _draw() {
 }
 
 //Public
-export default class ValuesController {
+export default class TimeController {
   constructor() {
     store.subscribe("time", _draw);
     TimeService.update()
