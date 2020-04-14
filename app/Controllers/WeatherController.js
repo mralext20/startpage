@@ -13,8 +13,12 @@ export default class ValuesController {
   constructor() {
     store.subscribe("weather", _draw);
     WeatherService.update();
-    setInterval(() => {
-      WeatherService.update()
-    }, 5 * 60 * 1000); // 5 minutes
+    let now = new Date();
+    let minutes = now.getMinutes() % 5 // the minutes component of the time
+    setTimeout(() => {
+      setInterval(() => {
+        WeatherService.update()
+      }, 5 * 60 * 1000); // 5 minutes
+    }, (5 - minutes) * 60 * 1000) // how long until the minutes change to a new minutes % 5 == 0
   }
 }
