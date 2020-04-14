@@ -1,56 +1,14 @@
-/**
-	Startpage Reworked
-	==================
-
-	by Christian Brassat,
-*/
-
-/**
-	Released under MIT License
-	
-	Copyright (c) 2010 Christian Brassat
-	<http://crshd.cc>
-
-	Permission is hereby granted, free of charge, to any person obtaining a copy
-	of this software and associated documentation files (the "Software"), to deal
-	in the Software without restriction, including without limitation the rights
-	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-	copies of the Software, and to permit persons to whom the Software is
-	furnished to do so, subject to the following conditions:
-	
-	The above copyright notice and this permission notice shall be included in
-	all copies or substantial portions of the Software.
-	
-	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-	THE SOFTWARE.
-*/
-
-
 @font-face {
 	font-family: "Roboto Condensed Light";
 	font-weight: 700;
-	src: url('../font/RobotoCondensed-Light.ttf');
+	src: url('../assets/font/RobotoCondensed-Light.ttf');
 }
 @font-face {
 	font-family: "Roboto Light";
 	font-weight: 300; /* Roboto Light */
-	src: url('../font/Roboto-Light.ttf');
-}
-@font-face {
-	font-family: "Windlesham Pro Medium"; /* Similar font to Google's 2015 logo */
-	font-weight: 300; /* Roboto Light */
-	src: url('../font/Windlesham-Pro-Medium.ttf');
+	src: url('../assets/font/Roboto-Light.ttf');
 }
 .container-flexbox {
-	display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6 */
-	display: -moz-box;     /* OLD - Firefox 19- (buggy but mostly works) */
-	display: -ms-flexbox;  /* NEW - Microsoft Edge */
-	display: -webkit-flex; /* NEW - Chrome */
 	display: flex;         /* NEW, Spec - Opera 12.1, Firefox 20+ */
 }
 body {
@@ -94,11 +52,7 @@ a:hover {
 	padding-left: .75em; /* Padding around link block */
 	padding-right: .75em;  
 }
-button {
-	background: transparent; /* Transparent button */
-	border: none !important;
-}
-​img {
+img {
 	max-width: 100%;
 	height: auto;
 }
@@ -123,11 +77,6 @@ li img {
 	margin-right: 5px;
 	vertical-align: middle;
 }
-#searches {
-	position: absolute; /* Position search box */
-	top: 2em; /* from top edge */
-	right: 2em; /* from right edge */
-}
 #clock {
 	position: fixed;
 	bottom: 10px;
@@ -139,149 +88,4 @@ li img {
     bottom: 10px;
     left: 10px;
     font-size: 2em;
-}
-#musicleft {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    font-size: 1.25em;
-}
-#musicright {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    font-size:1.25em;
-}
-@media (max-width: 360px) {
-	#searches {
-		top: 0em;
-		right: initial;
-	}
-	#clock { position: absolute;top:0em;left:0em;}
-  #weather {position:absolute;top:1em;left:0em;}
-  #musicleft {position:absolute;top:2em;left:0em;}
-  #musicright {position:absolute;top:3em;left:0em}
-}
-
-/* SEARCH BOX ================================= */
-
-form {
-	margin-top: 1em;
-}
-form input {
-	background: transparent; /* Transparent button */
-	border-style: solid;
-	border-top: 0px;
-	border-left: 0px;
-	border-right: 0px;
-	border-bottom: 1px solid #434343;
-	font-family: "Windlesham Pro Medium";
-	color: #6f6f6f; /* Text color search box */
-	font-size: 1.1em; /* Text size search box */
-	padding-left: 0.5em; /*Padding for the word "Google"*/
-}
-.group {
-	position: relative;
-	margin-bottom: 45px;
-}
-input {
-	padding: 10px 10px 10px 5px;
-	display: block;
-	width: 280px; /* 300px in the page, because of the padding */
-	border: none;
-	border-bottom: 1px solid #757575;
-}
-input:focus {
-	outline: none;
-	color: #fff;
-}
-label {
-	color: #999;
-	font-size: 18px;
-	font-weight: normal;
-	position: absolute;
-	pointer-events: none;
-	left: 5px;
-	top: 10px;
-	transition: 0.2s ease all;
-	-moz-transition: 0.2s ease all;
-	-webkit-transition: 0.2s ease all;
-}
-
-/* BOTTOM BARS ================================= */
-
-.bar {
-	position: relative;
-	display: block;
-	width: 300px;
-}
-.bar:before,
-.bar:after {
-	content: '';
-	height: 2px;
-	width: 0;
-	bottom: 1px;
-	position: absolute;
-	background: #468fcc;
-	transition: 0.2s ease all;
-	-moz-transition: 0.2s ease all;
-	-webkit-transition: 0.2s ease all;
-}
-.bar:before {
-	left: 50%;
-}
-.bar:after {
-	right: 50%;
-}
-/* active state */
-input:focus ~ .bar:before,
-input:focus ~ .bar:after {
-	width: 50%;
-}
-/* HIGHLIGHTER ================================== */
-
-.highlight {
-	position: absolute;
-	height: 60%;
-	width: 300px;
-	top: 25%;
-	left: 0;
-	pointer-events: none;
-	opacity: 0.5;
-}
-/* active state */
-
-input:focus ~ .highlight {
-	-webkit-animation: inputHighlighter 0.3s ease;
-	-moz-animation: inputHighlighter 0.3s ease;
-	animation: inputHighlighter 0.3s ease;
-}
-/* ANIMATIONS ================ */
-
-@-webkit-keyframes inputHighlighter {
-	from {
-		background: #468fcc;
-	}
-	to {
-		width: 0;
-		background: transparent;
-	}
-}
-@-moz-keyframes inputHighlighter {
-	from {
-		background: #468fcc;
-	}
-	to {
-		width: 0;
-		background: transparent;
-	}
-}
-@keyframes inputHighlighter {
-	from {
-		background: #468fcc;
-	}
-	to {
-		width: 0;
-		background: transparent;
-	}
 }
