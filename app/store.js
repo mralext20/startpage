@@ -6,6 +6,8 @@ let _state = {
   weather: new Weather({ outTemp: '-', insideTemp: '-', wind: '-', windGust: '-', windDirection: '-', rain: '-' }),
   /** @type Time */
   time: new Time(new Date()),
+  /** @type string */
+  calendarIcon: ""
 };
 
 /** Collection of listeners to be called based on keyed state changes
@@ -13,7 +15,8 @@ let _state = {
  */
 let _listeners = {
   weather: [],
-  time: []
+  time: [],
+  calendarIcon: [],
 };
 
 //NOTE You should not need to change the code from this point down
