@@ -1,27 +1,15 @@
 import store from "../store.js";
 import config from "../config.js"
 import Weather from "../Models/Weather.js";
+import { getJson } from "../utils.js"
 
-
-/**
- * @param {RequestInfo} url
- */
-async function _getData(url) {
-  let data;
-  const request = await fetch(url);
-  if (request.ok) {
-    return await request.json();
-  } else {
-    throw new Error("responce not ok")
-  }
-}
 
 class WeatherService {
   async update() {
     let ferinhight, celcius
     try {
-      ferinhight = await _getData(config.weatherFUrl)
-      celcius = await _getData(config.weatherCUrl)
+      ferinhight = await getJson(config.weatherFUrl)
+      celcius = await getJson(config.weatherCUrl)
     } catch (error) {
       return
     }

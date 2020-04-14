@@ -4,7 +4,6 @@ import store from "../store.js";
 //Private
 function _draw() {
   let calendarIconURL = store.State.calendarIcon;
-  console.log(calendarIconURL);
   let target = document.getElementById('calenderIcon');
   // @ts-ignore
   target.src = calendarIconURL;
