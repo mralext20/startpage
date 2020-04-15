@@ -1,0 +1,171 @@
+
+.sprite {
+  background-image: url(../assets/spritesheet.png);
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  padding-right: 5px;
+}
+
+.sprite-d-py {
+  background-position: -5px -5px;
+}
+
+.sprite-google-docs {
+  background-position: -31px -5px;
+}
+
+.sprite-fbm {
+  background-position: -5px -31px;
+}
+
+.sprite-github {
+  background-position: -31px -31px;
+}
+
+.sprite-google-gmail {
+  background-position: -57px -5px;
+}
+
+.sprite-google-photos {
+  background-position: -57px -31px;
+}
+
+.sprite-weewx {
+  background-position: -5px -57px;
+}
+
+
+#calenderIcon {
+  background-image: url(../assets/calendar.png);
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  padding-right: 5px;
+}
+
+.calendar-1 {
+  background-position: -5px -5px;
+}
+
+.calendar-2 {
+  background-position: -31px -5px;
+}
+
+.calendar-3 {
+  background-position: -57px -5px;
+}
+
+.calendar-4 {
+  background-position: -83px -5px;
+}
+
+.calendar-5 {
+  background-position: -109px -5px;
+}
+
+.calendar-6 {
+  background-position: -5px -31px;
+}
+
+.calendar-7 {
+  background-position: -31px -31px;
+}
+
+.calendar-8 {
+  background-position: -57px -31px;
+}
+
+.calendar-9 {
+  background-position: -83px -31px;
+}
+
+.calendar-10 {
+  background-position: -109px -31px;
+}
+
+.calendar-11 {
+  background-position: -5px -57px;
+}
+
+.calendar-12 {
+  background-position: -31px -57px;
+}
+
+.calendar-13 {
+  background-position: -57px -57px;
+}
+
+.calendar-14 {
+  background-position: -83px -57px;
+}
+
+.calendar-15 {
+  background-position: -109px -57px;
+}
+
+.calendar-16 {
+  background-position: -5px -83px;
+}
+
+.calendar-17 {
+  background-position: -31px -83px;
+}
+
+.calendar-18 {
+  background-position: -57px -83px;
+}
+
+.calendar-19 {
+  background-position: -83px -83px;
+}
+
+.calendar-20 {
+  background-position: -109px -83px;
+}
+
+.calendar-21 {
+  background-position: -5px -109px;
+}
+
+.calendar-22 {
+  background-position: -31px -109px;
+}
+
+.calendar-23 {
+  background-position: -57px -109px;
+}
+
+.calendar-24 {
+  background-position: -83px -109px;
+}
+
+.calendar-25 {
+  background-position: -109px -109px;
+}
+
+.calendar-26 {
+  background-position: -135px -5px;
+}
+
+.calendar-27 {
+  background-position: -135px -31px;
+}
+
+.calendar-28 {
+  background-position: -135px -57px;
+}
+
+.calendar-29 {
+  background-position: -135px -83px;
+}
+
+.calendar-30 {
+  background-position: -135px -109px;
+}
+
+.calendar-31 {
+  background-position: -5px -135px;
+}

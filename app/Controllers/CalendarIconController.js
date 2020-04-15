@@ -3,10 +3,9 @@ import store from "../store.js";
 
 //Private
 function _draw() {
-  let calendarIconURL = store.State.calendarIcon;
+  let calenderClass = store.State.calendarIcon;
   let target = document.getElementById('calenderIcon');
-  // @ts-ignore
-  target.src = calendarIconURL;
+  target.className = calenderClass;
 }
 
 //Public
