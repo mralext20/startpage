@@ -71,7 +71,7 @@ ul li {
 	padding: 5px;
 	height:1em;
 }
-li img {
+li img{
 	width: 16px;
 	border-width: 0;
 	margin-right: 5px;
@@ -95,4 +95,45 @@ li img {
 	top: 10px;
 	left: 10px;
 	font-size: .875em;
+}
+
+
+
+/* sprite sheet stuff */
+
+.sprite {
+	background-image: url(../assets/spritesheet.png);
+	background-repeat: no-repeat;
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	padding-right: 5px;
+}
+
+.sprite-d-py {
+	background-position: -5px -5px;
+}
+
+.sprite-google-docs {
+	background-position: -31px -5px;
+}
+
+.sprite-fbm {
+	background-position: -5px -31px;
+}
+
+.sprite-github {
+	background-position: -31px -31px;
+}
+
+.sprite-google-gmail {
+	background-position: -57px -5px;
+}
+
+.sprite-google-photos {
+	background-position: -57px -31px;
+}
+
+.sprite-weewx {
+	background-position: -5px -57px;
 }
