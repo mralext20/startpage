@@ -73,6 +73,14 @@
   <a href="http://alext.duckdns.org/weewx/c/">
     <div id="weather"></div>
   </a>
+  <div id="tasks">
+    <form onsubmit="app.TasksController.addTask(event)">
+      <input type="text" name="newTask">
+      <button class="" type=" submit"><i class="fas fa-plus"></i></button>
+    </form>
+    <div id="tasksList">
+    </div>
+  </div>
   <script type="module" src="bundle.js"></script>
   <!-- <script type="module" src="app/main.js"></script> -->
   <script defer src="js/fontawesome-all.js"></script>

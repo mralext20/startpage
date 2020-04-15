@@ -1,5 +1,6 @@
 import Weather from "./Models/Weather.js";
 import Time from "./Models/Time.js";
+import Task from "./Models/Task.js";
 
 let _state = {
   /** @type Weather */
@@ -7,7 +8,9 @@ let _state = {
   /** @type Time */
   time: new Time(new Date()),
   /** @type string */
-  calendarIcon: ""
+  calendarIcon: "",
+  /**@type Task[] */
+  tasks: [],
 };
 
 /** Collection of listeners to be called based on keyed state changes
@@ -17,6 +20,7 @@ let _listeners = {
   weather: [],
   time: [],
   calendarIcon: [],
+  tasks: []
 };
 
 //NOTE You should not need to change the code from this point down

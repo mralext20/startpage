@@ -41,7 +41,7 @@ body {
 }
 a {
 	color: #bcbcbc; /* Link Color */
-	font-size: 14px; /* Link Size */
+	font-size: .875em; /* Link Size */
 	text-decoration: none; /* Remove underlines */
 }
 a:hover {
@@ -88,4 +88,11 @@ li img {
     bottom: 10px;
     left: 10px;
     font-size: 2em;
+}
+
+#tasks {
+	position: fixed;
+	top: 10px;
+	left: 10px;
+	font-size: .875em;
 }
