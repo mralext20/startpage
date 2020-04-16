@@ -7,6 +7,6 @@ export default class TaskList {
     this.id = data.id || Date.now(); // create a new one if the id isnt set on the passed in
   }
   get Template() {
-    return `<div><p><button class="" onclick="app.TasksController.delete(${this.id})">X</button> ${this.name}</div>`
+    return `<div><p><a class="btn" onclick="app.TasksController.delete(${this.id})">X</a> ${this.name}</div>`
   }
 }

@@ -98,3 +98,11 @@ li img{
   left: 10px;
   font-size: .875em;
 }
+
+.btn {
+  padding: 5px;
+  border-radius: 20%;
+  background-color: #6F6F6F;
+  cursor: pointer;
+  color: #fff;
+}

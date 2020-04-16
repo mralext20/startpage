@@ -20,17 +20,13 @@ export default class TasksController {
   }
 
   /**
-   * @param {Event} event
+   * @param {HTMLInputElement} element
    */
-  addTask(event) {
-    event.preventDefault();
-    let form = event.target
-    // @ts-ignore
-    TasksService.addTask(form.newTask.value);
-    // @ts-ignore
-    form.newTask.value = "";
-    // @ts-ignore
-    form.newTask.focus();
+  addTask(element) {
+
+    TasksService.addTask(element.value);
+    element.value = ""
+    element.focus();
   }
   /**
    * @param {number} id
