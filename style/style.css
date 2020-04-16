@@ -106,3 +106,10 @@ li img{
   cursor: pointer;
   color: #fff;
 }
+
+input[type=text] {
+  border: 0;
+  outline: 0;
+  border-bottom: 2px solid #6F6F6F;
+  background: transparent;
+}
