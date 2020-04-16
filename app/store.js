@@ -11,6 +11,8 @@ let _state = {
   calendarIcon: "",
   /**@type Task[] */
   tasks: [],
+  /**@type boolean */
+  tasksShowSettings: false
 };
 
 /** Collection of listeners to be called based on keyed state changes
@@ -20,7 +22,8 @@ let _listeners = {
   weather: [],
   time: [],
   calendarIcon: [],
-  tasks: []
+  tasks: [],
+  tasksShowSettings: []
 };
 
 //NOTE You should not need to change the code from this point down

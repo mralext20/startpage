@@ -112,4 +112,9 @@ input[type=text] {
   outline: 0;
   border-bottom: 2px solid #6F6F6F;
   background: transparent;
+  color: #fff;
+}
+
+.some-space{
+  margin-top: 1em;
 }

@@ -81,7 +81,8 @@
     <input type="text" id="newTask">
     <a class="btn" onclick="app.TasksController.addTask(document.getElementById('newTask'))"><i
         class="fas fa-plus"></i></a>
-    <div id="tasksList">
+    <a class="btn" onclick="app.TasksController.toggleSettings()"><i class="fas fa-cog"></i></a>
+    <div class="some-space" id="tasksList">
     </div>
   </div>
   <script type="module" src="bundle.js"></script>

@@ -35,6 +35,14 @@ class TaskService {
     let tasks = store.State.tasks.filter(e => e.id != id);
     store.commit('tasks', tasks);
   }
+  get JSONdump() {
+    return JSON.stringify(store.State.tasks)
+  }
+  set JSONdump(json) {
+    let data = JSON.parse(json)
+    let parsed = data.map(e => new Task(e));
+    store.commit('tasks', parsed)
+  }
 }
 
 const service = new TaskService();
