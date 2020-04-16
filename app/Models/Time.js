@@ -5,12 +5,13 @@ export default class Time {
   constructor(time) {
     let currentHour = time.getHours()
     if (currentHour > 12) {
-      currentHour -= 12
+      currentHour -= 12 // from 24 h
     }
-    this.currentHour = (currentHour < 10 ? "0" : "") + currentHour;
-    if (currentHour == 0) {
-      this.currentHour = 12;
+    if (currentHour == 0) {// edge case when hours is 12
+      currentHour = 12;
     }
+    this.currentHour = currentHour;
+
     let currentMinute = time.getMinutes()
     this.currentMinutes = (currentMinute < 10 ? "0" : "") + currentMinute;
   }
