@@ -118,3 +118,33 @@ input[type=text] {
 .some-space{
   margin-top: 1em;
 }
+
+.icon {
+width: .875em;
+display: inline-block;
+font-size: inherit;
+height: 1em;
+overflow: visible;
+vertical-align: -.125em;
+overflow: visible;
+}
+
+.w-18 {
+  width: 1.125em;
+}
+
+.w-16 {
+  width: 1em;
+}
+
+.w-14 {
+	width: .875em;
+}
+
+.w-12 {
+  width:.75em;
+}
+
+.w-8 {
+  width:.5em;
+}

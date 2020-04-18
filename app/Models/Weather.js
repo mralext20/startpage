@@ -14,7 +14,7 @@ export default class Weather {
   }
 
   get Template() {
-    let out = `<i class=\"fas fa-thermometer-three-quarters\"></i>:${this.outTemp}&#176;C <i class=\"fas fa-home\"></i>:${this.insideTemp}&#176;C`;
+    let out = `<svg class="icon w-8"><use href="assets/sprites.svg#thermometer"></use></svg>:${this.outTemp}&#176;C <svg class="icon w-18"><use href="assets/sprites.svg#home"></use></svg>:${this.insideTemp}&#176;C`;
     if (this.wind) {
       let wind = ` \uD83C\uDF2C: ${this.windDirection} ${this.wind}`;
       if (this.windGust) {
@@ -24,7 +24,7 @@ export default class Weather {
       out += wind;
     }
     if (this.rain) {
-      out += `<i class=\"fas fa-tint\"></i>: ${this.rain} IN`
+      out += `<svg class="icon w-12"><use href="assets/sprites.svg#raindrop"></use></svg>: ${this.rain} IN`
     }
     return out;
   }

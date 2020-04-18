@@ -4,9 +4,6 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" href="style/style.css" type="text/css" />
-
-
-  <!-- Page Title -->
   <title>New Tab Page</title>
 
 </head>
@@ -79,16 +76,22 @@
   </a>
   <div id="tasks">
     <input type="text" id="newTask">
-    <a class="btn" onclick="app.TasksController.addTask(document.getElementById('newTask'))"><i
-        class="fas fa-plus"></i></a>
-    <a class="btn" onclick="app.TasksController.toggleSettings()"><i class="fas fa-cog"></i></a>
+    <a class="btn" onclick="app.TasksController.addTask(document.getElementById('newTask'))">
+      <svg class="icon w-14">
+        <use href="assets/sprites.svg#plus"></use>
+      </svg>
+    </a>
+    &NonBreakingSpace;
+    <a class="btn" onclick="app.TasksController.toggleSettings()">
+      <svg class="icon">
+        <use xlink:href="assets/sprites.svg#cog"></use>
+      </svg>
+    </a>
     <div class="some-space" id="tasksList">
     </div>
   </div>
   <script type="module" src="bundle.js"></script>
   <!-- <script type="module" src="app/main.js"></script> -->
-  <script defer src="js/fontawesome-all.js"></script>
-
 </body>
 
 </html>

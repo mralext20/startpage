@@ -9,7 +9,7 @@ function _draw() {
 }
 
 //Public
-export default class ValuesController {
+export default class WeatherController {
   constructor() {
     store.subscribe("weather", _draw);
     WeatherService.update();

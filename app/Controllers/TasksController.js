@@ -3,10 +3,21 @@ import store from "../store.js";
 
 //Private
 
-const _settingsTemplate = `
+const _settingsTemplate = /*html*/`
 <input id="JSONdump" type="text"/>
-<a class="btn" onclick="app.TasksController.import(document.getElementById('JSONdump'))" title="import"><i class="fas fa-upload"></i></a>
-<a class="btn" onclick="app.TasksController.export(document.getElementById('JSONdump'))" title="export"><i class="fas fa-download"></i></a>
+<a class="btn" onclick="app.TasksController.import(document.getElementById('JSONdump'))" title="import">
+  <svg class="icon w-16">
+    <use href="assets/sprites.svg#upload">
+    </use>
+  </svg>
+</a>
+&NonBreakingSpace;
+<a class="btn" onclick="app.TasksController.export(document.getElementById('JSONdump'))" title="export">
+  <svg class="icon w-16">
+    <use href="assets/sprites.svg#download">
+    </use>
+  </svg>
+</a>
 `
 
 function _draw() {
