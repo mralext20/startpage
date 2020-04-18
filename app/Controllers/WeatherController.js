@@ -16,9 +16,10 @@ export default class ValuesController {
     let now = new Date();
     let minutes = now.getMinutes() % 5 // the minutes component of the time
     setTimeout(() => {
+      WeatherService.update()
       setInterval(() => {
         WeatherService.update()
       }, 5 * 60 * 1000); // 5 minutes
-    }, (5 - minutes) * 60 * 1000) // how long until the minutes change to a new minutes % 5 == 0
+    }, ((5 - minutes) + 1) * 60 * 1000) // how long until the minutes change to a new minutes % 5 == 0
   }
 }
