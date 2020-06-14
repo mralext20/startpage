@@ -1,92 +1,94 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="style/style.css" type="text/css" />
+    <title>New Tab Page</title>
+  </head>
 
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <link rel="stylesheet" href="style/style.css" type="text/css" />
-  <title>New Tab Page</title>
-
-</head>
-
-<body class="container-flexbox">
-  <div id="container" class="container-flexbox">
-    <div class="block">
-      <h1>Google</h1>
-      <ul>
-        <li>
-          <a href="https://mail.google.com">
-            <i class="sprite sprite-google-gmail"></i>Mail
-          </a>
-        </li>
-        <li>
-          <a href="https://photos.google.com">
-            <i class="sprite sprite-google-photos"></i>Photos
-          </a>
-        </li>
-        <li>
-          <a href="https://mail.google.com">
-            <i id="calenderIcon" class="calendar-1"></i>Calendar
-          </a>
-        </li>
-      </ul>
+  <body class="container-flexbox">
+    <div id="container" class="container-flexbox">
+      <div class="block">
+        <h1>Google</h1>
+        <ul>
+          <li>
+            <a href="https://mail.google.com">
+              <i class="sprite sprite-google-gmail"></i>Mail
+            </a>
+          </li>
+          <li>
+            <a href="https://photos.google.com">
+              <i class="sprite sprite-google-photos"></i>Photos
+            </a>
+          </li>
+          <li>
+            <a href="https://calendar.google.com">
+              <i id="calenderIcon" class="calendar-1"></i>Calendar
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="block">
+        <h1>Coding</h1>
+        <ul>
+          <li>
+            <a href="https://github.com">
+              <i class="sprite sprite-github"></i>Github
+            </a>
+          </li>
+          <li>
+            <a href="https://discordpy.readthedocs.io/en/latest/">
+              <i class="sprite sprite-d-py"></i>d.py docs
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="block">
+        <h1>Services</h1>
+        <ul>
+          <li>
+            <a href="http://pi.alext.duckdns.org/admin">
+              <i class="sprite sprite-pi-hole"></i>Pi-Hole</a
+            >
+          </li>
+          <li>
+            <a href="http://pi.alext.duckdns.org/weewx/c">
+              <i class="sprite sprite-weewx"></i>Weewx</a
+            >
+          </li>
+          <li>
+            <a href="https://m.me/">
+              <i class="sprite sprite-fbm"></i>Messenger</a
+            >
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="block">
-      <h1>Coding</h1>
-      <ul>
-        <li>
-          <a href="https://github.com">
-            <i class="sprite sprite-github"></i>Github
-          </a>
-        </li>
-        <li>
-          <a href="https://discordpy.readthedocs.io/en/latest/">
-            <i class="sprite sprite-d-py"></i>d.py docs
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="block">
-      <h1>Services</h1>
-      <ul>
-        <li>
-          <a href="http://pi.alext.duckdns.org/admin">
-            <i class="sprite sprite-pi-hole"></i>Pi-Hole</a>
-        </li>
-        <li>
-          <a href="http://pi.alext.duckdns.org/weewx/c">
-            <i class="sprite sprite-weewx"></i>Weewx</a>
-        </li>
-        <li>
-          <a href="https://m.me/">
-            <i class="sprite sprite-fbm"></i>Messenger</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <a href="http://time.is">
-    <div id="clock"></div>
-  </a>
-  <a href="http://alext.duckdns.org/weewx/c/">
-    <div id="weather"></div>
-  </a>
-  <div id="tasks">
-    <input type="text" id="newTask">
-    <a class="btn" onclick="app.TasksController.addTask(document.getElementById('newTask'))">
-      <svg class="icon w-14">
-        <use href="assets/sprites.svg#plus"></use>
-      </svg>
+    <a href="http://time.is">
+      <div id="clock"></div>
     </a>
-    &NonBreakingSpace;
-    <a class="btn" onclick="app.TasksController.toggleSettings()">
-      <svg class="icon">
-        <use xlink:href="assets/sprites.svg#cog"></use>
-      </svg>
+    <a href="http://alext.duckdns.org/weewx/c/">
+      <div id="weather"></div>
     </a>
-    <div class="some-space" id="tasksList">
+    <div id="tasks">
+      <input type="text" id="newTask" />
+      <a
+        class="btn"
+        onclick="app.TasksController.addTask(document.getElementById('newTask'))"
+      >
+        <svg class="icon w-14">
+          <use href="assets/sprites.svg#plus"></use>
+        </svg>
+      </a>
+      &NonBreakingSpace;
+      <a class="btn" onclick="app.TasksController.toggleSettings()">
+        <svg class="icon">
+          <use xlink:href="assets/sprites.svg#cog"></use>
+        </svg>
+      </a>
+      <div class="some-space" id="tasksList"></div>
     </div>
-  </div>
-  <script type="module" src="bundle.js"></script>
-  <!-- <script type="module" src="app/main.js"></script> -->
-</body>
-
+    <script type="module" src="bundle.js"></script>
+    <!-- <script type="module" src="app/main.js"></script> -->
+  </body>
 </html>
